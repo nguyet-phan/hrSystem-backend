@@ -168,7 +168,7 @@ let updateUserData = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             console.log('check data nodejs: ', data);
-            if (!data.id) {
+            if (!data.id || !data.roleId || !data.positionId || !data.gender) {
                 resolve({
                     errCode: 2,
                     errMessage: 'Missing required parameter!'
@@ -181,7 +181,11 @@ let updateUserData = (data) => {
             if (user) {
                 user.firstName = data.firstName;
                 user.lastName = data.lastName;
+                user.phoneNumber = data.phoneNumber;
                 user.address = data.address;
+                user.gender = data.gender;
+                user.positionId = data.positionId;
+                user.roleId = data.roleId;
 
                 await user.save();
 
