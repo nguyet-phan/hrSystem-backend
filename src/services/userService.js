@@ -83,9 +83,17 @@ let getAllUsers = (userId) => {
             let users = '';
             if (userId === 'ALL') {
                 users = await db.User.findAll({
+                    order: [['id', 'DESC']],
                     attributes: {
                         exclude: ['password']
-                    }
+                    },
+                    include: [
+                        { model: db.Allcode, as: 'roleData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi'] },
+                    ],
+                    raw: true,
+                    nest: true
                 })
             }
             if (userId && userId !== 'ALL') {
@@ -93,7 +101,14 @@ let getAllUsers = (userId) => {
                     where: { id: userId },
                     attributes: {
                         exclude: ['password']
-                    }
+                    },
+                    include: [
+                        { model: db.Allcode, as: 'roleData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi'] },
+                    ],
+                    raw: true,
+                    nest: true
                 })
             }
             resolve(users);

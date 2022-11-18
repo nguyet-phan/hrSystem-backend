@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('project_members', {
+        await queryInterface.createTable('onsite_salaries', {
 
             id: {
                 allowNull: false,
@@ -9,10 +9,26 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            projectId: {
+            staffId: {
+                allowNull: false,
                 type: Sequelize.INTEGER
             },
-            staffId: {
+            date: {
+                type: Sequelize.DATE
+            },
+            place: {
+                type: Sequelize.TEXT
+            },
+            startDay: {
+                allowNull: false,
+                type: Sequelize.DATE
+            },
+            endDay: {
+                allowNull: false,
+                type: Sequelize.DATE
+            },
+            status: {
+                defaultValue: 0,
                 type: Sequelize.INTEGER
             },
 
@@ -27,6 +43,6 @@ module.exports = {
         });
     },
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('project_members');
+        await queryInterface.dropTable('onsite_salaries');
     }
 };

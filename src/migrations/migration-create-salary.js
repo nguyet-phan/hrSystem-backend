@@ -10,19 +10,32 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             staffId: {
+                allowNull: false,
                 type: Sequelize.INTEGER
             },
-            basicSalary: {
-                type: Sequelize.INTEGER
+            date: {
+                type: Sequelize.DATE
             },
-            projectSalary: {
-                type: Sequelize.INTEGER
+            basicSalaries: {
+                type: Sequelize.FLOAT
             },
-            bonusSalary: {
-                type: Sequelize.INTEGER
+            projectSalaries: {
+                type: Sequelize.FLOAT
             },
-            deductionSalary: {
-                type: Sequelize.INTEGER
+            bonusSalaries: {
+                type: Sequelize.FLOAT
+            },
+            projectSalaries: {
+                type: Sequelize.FLOAT
+            },
+            overtimeSalaries: {
+                type: Sequelize.FLOAT
+            },
+            onsiteSalaries: {
+                type: Sequelize.FLOAT
+            },
+            deductionSalaries: {
+                type: Sequelize.FLOAT
             },
 
             createdAt: {
