@@ -20,9 +20,6 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.FLOAT
             },
-            place: {
-                type: Sequelize.TEXT
-            },
             status: {
                 defaultValue: 0,
                 type: Sequelize.INTEGER

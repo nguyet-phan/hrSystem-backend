@@ -80,6 +80,19 @@ let getAllCode = async (req, res) => {
     }
 }
 
+let getAllManagers = async (req, res) => {
+    try {
+        let managers = await userService.getAllManagersService();
+        return res.status(200).json(managers);
+    } catch (e) {
+        console.log('Get all manager error: ', e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from server'
+        })
+    }
+}
+
 module.exports = {
     handleLogin: handleLogin,
     handleGetAllUsers: handleGetAllUsers,
@@ -87,4 +100,5 @@ module.exports = {
     handleEditUser: handleEditUser,
     handleDeleteUser: handleDeleteUser,
     getAllCode: getAllCode,
+    getAllManagers: getAllManagers,
 }

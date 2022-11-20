@@ -247,6 +247,26 @@ let getAllCodeService = (typeInput) => {
     })
 }
 
+let getAllManagersService = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let managers = await db.User.findAll({
+                where: { roleId: 'R2' },
+                attributes: {
+                    exclude: ['password', 'image']
+                },
+            })
+
+            resolve({
+                errCode: 0,
+                data: managers
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 module.exports = {
     handleUserLogin: handleUserLogin,
     getAllUsers: getAllUsers,
@@ -254,4 +274,5 @@ module.exports = {
     deleteUser: deleteUser,
     updateUserData: updateUserData,
     getAllCodeService: getAllCodeService,
+    getAllManagersService: getAllManagersService,
 }
