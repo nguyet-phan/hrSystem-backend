@@ -15,14 +15,11 @@ module.exports = {
             eventName: {
                 type: Sequelize.STRING
             },
-            description: {
-                type: Sequelize.TEXT
-            },
             startDay: {
-                type: Sequelize.DATE
+                type: Sequelize.DATEONLY
             },
             endDay: {
-                type: Sequelize.DATE
+                type: Sequelize.DATEONLY
             },
 
             createdAt: {

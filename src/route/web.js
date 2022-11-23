@@ -2,6 +2,7 @@ import express from "express";
 import homeController from "../controllers/homeController";
 import userController from "../controllers/userController";
 import salaryController from "../controllers/salaryController";
+import eventController from "../controllers/eventController";
 
 let router = express.Router();
 
@@ -27,6 +28,11 @@ let initWebRoutes = (app) => {
 
     router.post("/api/save-basic-salary", salaryController.postBasicSalary);
     router.get("/api/get-basic-salary-by-id", salaryController.getBasicSalaryById);
+
+    router.get("/api/get-all-events", eventController.handleGetAllEvents);
+    router.post("/api/create-new-event", eventController.handleCreateNewEvent);
+    router.put("/api/edit-event", eventController.handleEditEvent);
+    router.delete("/api/delete-event", eventController.handleDeleteEvent);
 
     salaryController
     return app.use("/", router);
