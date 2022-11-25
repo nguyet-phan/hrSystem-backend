@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     };
     DeductionSalary.init({
         staffId: DataTypes.INTEGER,
-        date: DataTypes.DATE,
+        month: DataTypes.STRING,
         quantity: DataTypes.FLOAT,
 
     }, {

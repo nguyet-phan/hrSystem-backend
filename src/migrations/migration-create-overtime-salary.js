@@ -21,7 +21,7 @@ module.exports = {
                 type: Sequelize.FLOAT
             },
             status: {
-                defaultValue: 0,
+                defaultValue: 1,
                 type: Sequelize.INTEGER
             },
 

@@ -28,7 +28,7 @@ module.exports = {
                 type: Sequelize.DATE
             },
             status: {
-                defaultValue: 0,
+                defaultValue: 1,
                 type: Sequelize.INTEGER
             },
 

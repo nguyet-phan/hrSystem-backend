@@ -16,13 +16,14 @@ module.exports = (sequelize, DataTypes) => {
     };
     Salary.init({
         staffId: DataTypes.INTEGER,
-        date: DataTypes.DATE,
+        month: DataTypes.STRING,
         basicSalaries: DataTypes.FLOAT,
         projectSalaries: DataTypes.FLOAT,
         bonusSalaries: DataTypes.FLOAT,
         overtimeSalaries: DataTypes.FLOAT,
         onsiteSalaries: DataTypes.FLOAT,
         deductionSalaries: DataTypes.FLOAT,
+        status: DataTypes.INTEGER,
     }, {
         sequelize,
         modelName: 'Salary',

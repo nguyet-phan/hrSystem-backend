@@ -1,10 +1,10 @@
 import db from "../models/index";
 
 let saveBasicSalaryService = (inputData) => {
-    console.log(inputData);
+    console.log('check inputData: ', inputData);
     return new Promise(async (resolve, reject) => {
         try {
-            if (!inputData.staffId || !inputData.basicSalary) {
+            if (!inputData.staffId || !inputData.basicSalary || !inputData.month) {
                 resolve({
                     errCode: 1,
                     errMessage: "Missing parameter"
@@ -13,7 +13,16 @@ let saveBasicSalaryService = (inputData) => {
                 await db.Salary.create({
                     staffId: inputData.staffId,
                     basicSalaries: inputData.basicSalary,
-                    date: new Date(),
+                    deductionSalaries: inputData.basicSalary / 24 * inputData.deductionSalary,
+                    // date: new Date(),
+                    month: inputData.month
+                })
+
+                await db.DeductionSalary.create({
+                    staffId: inputData.staffId,
+                    quantity: inputData.deductionSalary,
+                    // date: new Date(),
+                    month: inputData.month
                 })
 
                 resolve({

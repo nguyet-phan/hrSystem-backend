@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('deduction_salaries', {
+        await queryInterface.createTable('DeductionSalaries', {
 
             id: {
                 allowNull: false,
@@ -13,8 +13,9 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.INTEGER
             },
-            date: {
-                type: Sequelize.DATE
+            month: {
+                allowNull: false,
+                type: Sequelize.STRING
             },
             quantity: {
                 allowNull: false,
@@ -32,6 +33,6 @@ module.exports = {
         });
     },
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('deduction_salaries');
+        await queryInterface.dropTable('DeductionSalaries');
     }
 };

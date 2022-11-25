@@ -13,8 +13,10 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.INTEGER
             },
-            date: {
-                type: Sequelize.DATE
+
+            month: {
+                allowNull: false,
+                type: Sequelize.STRING
             },
             basicSalaries: {
                 type: Sequelize.FLOAT
@@ -36,6 +38,10 @@ module.exports = {
             },
             deductionSalaries: {
                 type: Sequelize.FLOAT
+            },
+            status: {
+                defaultValue: 1,
+                type: Sequelize.INTEGER
             },
 
             createdAt: {
