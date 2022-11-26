@@ -26,15 +26,17 @@ let initWebRoutes = (app) => {
     router.get("/api/allcode", userController.getAllCode);
     router.get("/api/get-all-managers", userController.getAllManagers);
 
-    router.post("/api/save-basic-salary", salaryController.postBasicSalary);
-    router.get("/api/get-basic-salary-by-id", salaryController.getBasicSalaryById);
-
     router.get("/api/get-all-events", eventController.handleGetAllEvents);
     router.post("/api/create-new-event", eventController.handleCreateNewEvent);
     router.put("/api/edit-event", eventController.handleEditEvent);
     router.delete("/api/delete-event", eventController.handleDeleteEvent);
 
-    salaryController
+    router.post("/api/save-basic-salary", salaryController.postBasicSalary);
+    router.get("/api/get-basic-salary-by-id", salaryController.getBasicSalaryById);
+    router.get("/api/get-all-bonus-salary-by-month", salaryController.getAllBonusSalaryByMonth); //bonusSalary by staffId and month
+
+    router.get("/api/get-all-salary-by-month", salaryController.getAllSalaryByMonth); //Salary by staffId and month
+
     return app.use("/", router);
 }
 

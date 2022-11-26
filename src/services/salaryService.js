@@ -10,20 +10,32 @@ let saveBasicSalaryService = (inputData) => {
                     errMessage: "Missing parameter"
                 })
             } else {
-                await db.Salary.create({
-                    staffId: inputData.staffId,
-                    basicSalaries: inputData.basicSalary,
-                    deductionSalaries: inputData.basicSalary / 24 * inputData.deductionSalary,
-                    // date: new Date(),
-                    month: inputData.month
-                })
 
-                await db.DeductionSalary.create({
-                    staffId: inputData.staffId,
-                    quantity: inputData.deductionSalary,
-                    // date: new Date(),
-                    month: inputData.month
-                })
+                if (inputData.deductionSalary !== '0') {
+                    await db.Salary.create({
+                        staffId: inputData.staffId,
+                        basicSalaries: inputData.basicSalary,
+                        deductionSalaries: inputData.basicSalary / 24 * inputData.deductionSalary,
+                        // date: new Date(),
+                        month: inputData.month
+                    })
+                    await db.DeductionSalary.create({
+                        staffId: inputData.staffId,
+                        quantity: inputData.deductionSalary,
+                        // date: new Date(),
+                        month: inputData.month
+                    })
+                }
+                else {
+                    await db.Salary.create({
+                        staffId: inputData.staffId,
+                        basicSalaries: inputData.basicSalary,
+                        deductionSalaries: inputData.basicSalary / 24 * inputData.deductionSalary,
+                        // date: new Date(),
+                        month: inputData.month
+                    })
+                }
+
 
                 resolve({
                     errCode: 0,
@@ -79,7 +91,63 @@ let getBasicSalaryByIdService = (inputId) => {
     })
 }
 
+let getAllBonusSalaryByMonth = (staffId, month) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+
+            let bonusSalaries = await db.BonusSalary.findAll({
+                where: {
+                    staffId: staffId,
+                    month: month
+                },
+                raw: true,
+                nest: true
+            })
+
+            resolve(bonusSalaries);
+
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getAllSalaryByMonth = (staffId, month) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!staffId || !month) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing required parameters',
+                })
+            } else {
+                let Salaries = await db.Salary.findAll({
+                    where: {
+                        staffId: staffId,
+                        month: month
+                    },
+                    raw: true,
+                    nest: true
+                })
+
+                if (!Salaries) Salaries = [];
+                resolve({
+                    errCode: 0,
+                    data: Salaries
+                });
+            }
+
+
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 module.exports = {
     saveBasicSalaryService: saveBasicSalaryService,
     getBasicSalaryByIdService: getBasicSalaryByIdService,
+    getAllBonusSalaryByMonth: getAllBonusSalaryByMonth,
+
+    getAllSalaryByMonth: getAllSalaryByMonth,
 }

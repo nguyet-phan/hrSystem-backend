@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('bonus_salaries', {
+        await queryInterface.createTable('BonusSalaries', {
 
             id: {
                 allowNull: false,
@@ -13,8 +13,9 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.INTEGER
             },
-            date: {
-                type: Sequelize.DATE
+            month: {
+                allowNull: false,
+                type: Sequelize.STRING
             },
             reason: {
                 type: Sequelize.TEXT
@@ -34,6 +35,6 @@ module.exports = {
         });
     },
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('bonus_salaries');
+        await queryInterface.dropTable('BonusSalaries');
     }
 };

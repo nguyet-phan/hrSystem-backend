@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     };
     BonusSalary.init({
         staffId: DataTypes.INTEGER,
-        date: DataTypes.DATE,
+        month: DataTypes.STRING,
         reason: DataTypes.TEXT,
         salary: DataTypes.FLOAT,
     }, {

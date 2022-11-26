@@ -26,7 +26,39 @@ let getBasicSalaryById = async (req, res) => {
     }
 }
 
+let getAllBonusSalaryByMonth = async (req, res) => {
+    let staffId = req.query.staffId;
+    let month = req.query.month;
+    if (!staffId || !month) {
+        return res.status(200).json({
+            errCode: 1,
+            errMessage: 'Missing required parameters',
+            bonusSalaries: []
+        })
+    }
+
+    let bonusSalaries = await salaryService.getAllBonusSalaryByMonth(staffId, month);
+
+    return res.status(200).json({
+        errCode: 0,
+        errMessage: 'OK',
+        bonusSalaries
+    })
+
+}
+
+let getAllSalaryByMonth = async (req, res) => {
+    let Salaries = await salaryService.getAllSalaryByMonth(req.query.staffId, req.query.month);
+
+    return res.status(200).json({
+        Salaries
+    })
+}
+
 module.exports = {
     postBasicSalary: postBasicSalary,
     getBasicSalaryById: getBasicSalaryById,
+    getAllBonusSalaryByMonth: getAllBonusSalaryByMonth,
+
+    getAllSalaryByMonth: getAllSalaryByMonth,
 }
