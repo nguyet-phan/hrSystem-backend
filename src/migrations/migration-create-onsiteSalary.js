@@ -28,9 +28,9 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE
             },
-            status: {
-                defaultValue: 1,
-                type: Sequelize.INTEGER
+            statusId: {
+                defaultValue: 'S1',
+                type: Sequelize.STRING
             },
 
             createdAt: {

@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('overtime_salaries', {
+        await queryInterface.createTable('OvertimeSalaries', {
 
             id: {
                 allowNull: false,
@@ -21,9 +21,9 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.FLOAT
             },
-            status: {
-                defaultValue: 1,
-                type: Sequelize.INTEGER
+            statusId: {
+                defaultValue: 'S1',
+                type: Sequelize.STRING
             },
 
             createdAt: {
@@ -37,6 +37,6 @@ module.exports = {
         });
     },
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('overtime_salaries');
+        await queryInterface.dropTable('OvertimeSalaries');
     }
 };

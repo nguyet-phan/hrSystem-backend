@@ -39,9 +39,9 @@ module.exports = {
             deductionSalaries: {
                 type: Sequelize.FLOAT
             },
-            status: {
-                defaultValue: 1,
-                type: Sequelize.INTEGER
+            statusId: {
+                defaultValue: 'S1',
+                type: Sequelize.STRING
             },
 
             createdAt: {

@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         place: DataTypes.TEXT,
         startDay: DataTypes.DATE,
         endDay: DataTypes.DATE,
-        status: DataTypes.INTEGER,
+        statusId: DataTypes.STRING,
 
     }, {
         sequelize,

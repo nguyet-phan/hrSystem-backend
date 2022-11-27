@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         overtimeSalaries: DataTypes.FLOAT,
         onsiteSalaries: DataTypes.FLOAT,
         deductionSalaries: DataTypes.FLOAT,
-        status: DataTypes.INTEGER,
+        statusId: DataTypes.STRING,
     }, {
         sequelize,
         modelName: 'Salary',
