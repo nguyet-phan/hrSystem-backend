@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     };
     ProjectSalary.init({
         staffId: DataTypes.INTEGER,
-        date: DataTypes.DATE,
+        month: DataTypes.STRING,
         projectName: DataTypes.TEXT,
         salary: DataTypes.FLOAT,
 

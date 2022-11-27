@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     };
     OnsiteSalary.init({
         staffId: DataTypes.INTEGER,
-        date: DataTypes.DATE,
+        month: DataTypes.STRING,
         place: DataTypes.TEXT,
         startDay: DataTypes.DATE,
         endDay: DataTypes.DATE,

@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('overtime_salaries', {
+        await queryInterface.createTable('OnsiteSalaries', {
 
             id: {
                 allowNull: false,
@@ -13,12 +13,20 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.INTEGER
             },
-            date: {
+            month: {
+                allowNull: false,
+                type: Sequelize.STRING
+            },
+            place: {
+                type: Sequelize.TEXT
+            },
+            startDay: {
+                allowNull: false,
                 type: Sequelize.DATE
             },
-            hour: {
+            endDay: {
                 allowNull: false,
-                type: Sequelize.FLOAT
+                type: Sequelize.DATE
             },
             status: {
                 defaultValue: 1,
@@ -36,6 +44,6 @@ module.exports = {
         });
     },
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('overtime_salaries');
+        await queryInterface.dropTable('OnsiteSalaries');
     }
 };

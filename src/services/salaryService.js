@@ -11,18 +11,16 @@ let saveBasicSalaryService = (inputData) => {
                 })
             } else {
 
-                if (inputData.deductionSalary !== '0') {
+                if (inputData.deductionSalary !== '0' && inputData.deductionSalary !== '') {
                     await db.Salary.create({
                         staffId: inputData.staffId,
                         basicSalaries: inputData.basicSalary,
                         deductionSalaries: inputData.basicSalary / 24 * inputData.deductionSalary,
-                        // date: new Date(),
                         month: inputData.month
                     })
                     await db.DeductionSalary.create({
                         staffId: inputData.staffId,
                         quantity: inputData.deductionSalary,
-                        // date: new Date(),
                         month: inputData.month
                     })
                 }

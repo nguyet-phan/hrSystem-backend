@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     };
     OvertimeSalary.init({
         staffId: DataTypes.INTEGER,
-        date: DataTypes.DATE,
+        month: DataTypes.STRING,
         hour: DataTypes.FLOAT,
         status: DataTypes.INTEGER,
 
