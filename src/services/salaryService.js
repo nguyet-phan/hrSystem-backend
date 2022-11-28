@@ -191,42 +191,28 @@ let saveBasicSalaryService = (inputData) => {
     })
 }
 
-let getBasicSalaryByIdService = (inputId) => {
+let getBasicSalaryByIdService = (staffId, month) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!inputId) {
+            if (!staffId || !month) {
                 resolve({
                     errCode: 1,
                     errMessage: "Missing parameter!"
                 })
             } else {
-                let data = await db.User.findOne({
-                    where: {
-                        id: inputId
-                    },
-                    attributes: {
-                        exclude: ['password', 'image']
-                    },
-                    include: [
-                        {
-                            model: db.Salary,
-                            attributes: ['basicSalaries', 'month']
-                        },
-                        {
-                            model: db.Allcode,
-                            as: 'positionData',
-                            attributes: ['valueEn', 'valueVi']
-                        },
 
-                    ],
+                let data = await db.Salary.findOne({
+                    where: {
+                        staffId: staffId,
+                        month: month
+                    },
                     raw: true,
                     nest: true
                 })
 
-                resolve({
-                    errCode: 0,
-                    data: data
-                })
+                if (!data) data = {};
+
+                resolve(data)
             }
         } catch (e) {
             reject(e);
@@ -234,21 +220,145 @@ let getBasicSalaryByIdService = (inputId) => {
     })
 }
 
-let getAllBonusSalaryByMonth = (staffId, month) => {
+let getBonusSalaryByIdService = (staffId, month) => {
     return new Promise(async (resolve, reject) => {
         try {
+            if (!staffId || !month) {
+                resolve({
+                    errCode: 1,
+                    errMessage: "Missing parameter!"
+                })
+            } else {
 
-            let bonusSalaries = await db.BonusSalary.findAll({
-                where: {
-                    staffId: staffId,
-                    month: month
-                },
-                raw: true,
-                nest: true
-            })
+                let data = await db.BonusSalary.findOne({
+                    where: {
+                        staffId: staffId,
+                        month: month
+                    },
+                    raw: true,
+                    nest: true
+                })
 
-            resolve(bonusSalaries);
+                if (!data) data = {};
 
+                resolve(data)
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getProjectSalaryByIdService = (staffId, month) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!staffId || !month) {
+                resolve({
+                    errCode: 1,
+                    errMessage: "Missing parameter!"
+                })
+            } else {
+
+                let data = await db.ProjectSalary.findOne({
+                    where: {
+                        staffId: staffId,
+                        month: month
+                    },
+                    raw: true,
+                    nest: true
+                })
+
+                if (!data) data = {};
+
+                resolve(data)
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getOvertimeSalaryByIdService = (staffId, month) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!staffId || !month) {
+                resolve({
+                    errCode: 1,
+                    errMessage: "Missing parameter!"
+                })
+            } else {
+
+                let data = await db.OvertimeSalary.findOne({
+                    where: {
+                        staffId: staffId,
+                        month: month
+                    },
+                    raw: true,
+                    nest: true
+                })
+
+                if (!data) data = {};
+
+                resolve(data)
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getOnsiteSalaryByIdService = (staffId, month) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!staffId || !month) {
+                resolve({
+                    errCode: 1,
+                    errMessage: "Missing parameter!"
+                })
+            } else {
+
+                let data = await db.OnsiteSalary.findOne({
+                    where: {
+                        staffId: staffId,
+                        month: month
+                    },
+                    raw: true,
+                    nest: true
+                })
+
+                if (!data) data = {};
+
+                resolve(data)
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getDeductionSalaryByIdService = (staffId, month) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!staffId || !month) {
+                resolve({
+                    errCode: 1,
+                    errMessage: "Missing parameter!"
+                })
+            } else {
+
+                let data = await db.DeductionSalary.findOne({
+                    where: {
+                        staffId: staffId,
+                        month: month
+                    },
+                    raw: true,
+                    nest: true
+                })
+
+                if (!data) data = {};
+
+                resolve(data)
+            }
         } catch (e) {
             reject(e);
         }
@@ -290,7 +400,11 @@ let getAllSalaryByMonth = (staffId, month) => {
 module.exports = {
     saveBasicSalaryService: saveBasicSalaryService,
     getBasicSalaryByIdService: getBasicSalaryByIdService,
-    getAllBonusSalaryByMonth: getAllBonusSalaryByMonth,
+    getBonusSalaryByIdService: getBonusSalaryByIdService,
+    getProjectSalaryByIdService: getProjectSalaryByIdService,
+    getOvertimeSalaryByIdService: getOvertimeSalaryByIdService,
+    getOnsiteSalaryByIdService: getOnsiteSalaryByIdService,
+    getDeductionSalaryByIdService: getDeductionSalaryByIdService,
 
     getAllSalaryByMonth: getAllSalaryByMonth,
 }

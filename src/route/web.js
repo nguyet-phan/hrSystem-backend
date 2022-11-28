@@ -33,7 +33,11 @@ let initWebRoutes = (app) => {
 
     router.post("/api/save-basic-salary", salaryController.postBasicSalary);
     router.get("/api/get-basic-salary-by-id", salaryController.getBasicSalaryById);
-    router.get("/api/get-all-bonus-salary-by-month", salaryController.getAllBonusSalaryByMonth); //bonusSalary by staffId and month
+    router.get("/api/get-bonus-salary-by-id", salaryController.getBonusSalaryById);
+    router.get("/api/get-project-salary-by-id", salaryController.getProjectSalaryById);
+    router.get("/api/get-overtime-salary-by-id", salaryController.getOvertimeSalaryById);
+    router.get("/api/get-onsite-salary-by-id", salaryController.getOnsiteSalaryById);
+    router.get("/api/get-deduction-salary-by-id", salaryController.getDeductionSalaryById);
 
     router.get("/api/get-all-salary-by-month", salaryController.getAllSalaryByMonth); //Salary by staffId and month
 

@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            Salary.belongsTo(models.User, { foreignKey: 'staffId' })
+            Salary.belongsTo(models.User, { foreignKey: 'staffId' });
+
+            // Salary.hasMany(models.BonusSalary, { foreignKey: 'staffId' });
         }
     };
     Salary.init({

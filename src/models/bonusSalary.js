@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            // BonusSalary.belongsTo(models.Salary, { foreignKey: 'staffId' })
+
         }
     };
     BonusSalary.init({

@@ -15,8 +15,15 @@ let postBasicSalary = async (req, res) => {
 
 let getBasicSalaryById = async (req, res) => {
     try {
-        let basicSa = await salaryService.getBasicSalaryByIdService(req.query.id);
-        return res.status(200).json(basicSa);
+        let staffId = req.query.staffId;
+        let month = req.query.month;
+        let data = await salaryService.getBasicSalaryByIdService(staffId, month);
+
+        return res.status(200).json({
+            errCode: 0,
+            errMessage: 'OK',
+            data
+        })
     } catch (e) {
         console.log(e);
         return res.status(200).json({
@@ -26,25 +33,144 @@ let getBasicSalaryById = async (req, res) => {
     }
 }
 
-let getAllBonusSalaryByMonth = async (req, res) => {
-    let staffId = req.query.staffId;
-    let month = req.query.month;
-    if (!staffId || !month) {
+let getBonusSalaryById = async (req, res) => {
+    try {
+        let staffId = req.query.staffId;
+        let month = req.query.month;
+        if (!staffId || !month) {
+            return res.status(200).json({
+                errCode: 1,
+                errMessage: 'Missing required parameters',
+                data: []
+            })
+        }
+
+        let data = await salaryService.getBonusSalaryByIdService(staffId, month);
+
         return res.status(200).json({
-            errCode: 1,
-            errMessage: 'Missing required parameters',
-            bonusSalaries: []
+            errCode: 0,
+            errMessage: 'OK',
+            data
+        })
+    } catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
         })
     }
+}
 
-    let bonusSalaries = await salaryService.getAllBonusSalaryByMonth(staffId, month);
+let getProjectSalaryById = async (req, res) => {
+    try {
+        let staffId = req.query.staffId;
+        let month = req.query.month;
+        if (!staffId || !month) {
+            return res.status(200).json({
+                errCode: 1,
+                errMessage: 'Missing required parameters',
+                data: []
+            })
+        }
 
-    return res.status(200).json({
-        errCode: 0,
-        errMessage: 'OK',
-        bonusSalaries
-    })
+        let data = await salaryService.getProjectSalaryByIdService(staffId, month);
 
+        return res.status(200).json({
+            errCode: 0,
+            errMessage: 'OK',
+            data
+        })
+    } catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
+let getOvertimeSalaryById = async (req, res) => {
+    try {
+        let staffId = req.query.staffId;
+        let month = req.query.month;
+        if (!staffId || !month) {
+            return res.status(200).json({
+                errCode: 1,
+                errMessage: 'Missing required parameters',
+                data: []
+            })
+        }
+
+        let data = await salaryService.getOvertimeSalaryByIdService(staffId, month);
+
+        return res.status(200).json({
+            errCode: 0,
+            errMessage: 'OK',
+            data
+        })
+    } catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
+let getOnsiteSalaryById = async (req, res) => {
+    try {
+        let staffId = req.query.staffId;
+        let month = req.query.month;
+        if (!staffId || !month) {
+            return res.status(200).json({
+                errCode: 1,
+                errMessage: 'Missing required parameters',
+                data: []
+            })
+        }
+
+        let data = await salaryService.getOnsiteSalaryByIdService(staffId, month);
+
+        return res.status(200).json({
+            errCode: 0,
+            errMessage: 'OK',
+            data
+        })
+    } catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
+let getDeductionSalaryById = async (req, res) => {
+    try {
+        let staffId = req.query.staffId;
+        let month = req.query.month;
+        if (!staffId || !month) {
+            return res.status(200).json({
+                errCode: 1,
+                errMessage: 'Missing required parameters',
+                data: []
+            })
+        }
+
+        let data = await salaryService.getDeductionSalaryByIdService(staffId, month);
+
+        return res.status(200).json({
+            errCode: 0,
+            errMessage: 'OK',
+            data
+        })
+    } catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
 }
 
 let getAllSalaryByMonth = async (req, res) => {
@@ -58,7 +184,11 @@ let getAllSalaryByMonth = async (req, res) => {
 module.exports = {
     postBasicSalary: postBasicSalary,
     getBasicSalaryById: getBasicSalaryById,
-    getAllBonusSalaryByMonth: getAllBonusSalaryByMonth,
+    getBonusSalaryById: getBonusSalaryById,
+    getProjectSalaryById: getProjectSalaryById,
+    getOvertimeSalaryById: getOvertimeSalaryById,
+    getOnsiteSalaryById: getOnsiteSalaryById,
+    getDeductionSalaryById: getDeductionSalaryById,
 
     getAllSalaryByMonth: getAllSalaryByMonth,
 }
