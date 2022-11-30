@@ -374,20 +374,35 @@ let getAllSalaryByMonth = (staffId, month) => {
                     errMessage: 'Missing required parameters',
                 })
             } else {
-                let Salaries = await db.Salary.findAll({
-                    where: {
-                        staffId: staffId,
-                        month: month
-                    },
-                    raw: true,
-                    nest: true
-                })
+                let Salaries = [];
+                if (staffId === 'ALL') {
+                    Salaries = await db.Salary.findAll({
+                        where: {
+                            month: month
+                        },
+                        include: [
+                            { model: db.User, attributes: ['id', 'firstName', 'lastName'] },
+                        ],
+                        raw: true,
+                        nest: true
+                    })
+                }
 
-                if (!Salaries) Salaries = [];
-                resolve({
-                    errCode: 0,
-                    data: Salaries
-                });
+                if (staffId && staffId !== 'ALL') {
+                    Salaries = await db.Salary.findAll({
+                        where: {
+                            staffId: staffId,
+                            month: month
+                        },
+                        include: [
+                            { model: db.User, attributes: ['id', 'firstName', 'lastName'] },
+                        ],
+                        raw: true,
+                        nest: true
+                    })
+                }
+
+                resolve(Salaries);
             }
 
 

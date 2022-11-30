@@ -174,11 +174,21 @@ let getDeductionSalaryById = async (req, res) => {
 }
 
 let getAllSalaryByMonth = async (req, res) => {
-    let Salaries = await salaryService.getAllSalaryByMonth(req.query.staffId, req.query.month);
+    try {
+        let data = await salaryService.getAllSalaryByMonth(req.query.staffId, req.query.month);
 
-    return res.status(200).json({
-        Salaries
-    })
+        return res.status(200).json({
+            errCode: 0,
+            data
+        })
+
+    } catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
 }
 
 module.exports = {
