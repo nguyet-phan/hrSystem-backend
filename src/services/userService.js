@@ -47,17 +47,17 @@ let handleUserLogin = (email, password) => {
                         userData.user = user;
                     } else {
                         userData.errCode = 3;
-                        userData.errMessage = 'Wrong password';
+                        userData.errMessage = 'Mật khẩu không chính xác.';
                     }
                 } else {
                     userData.errCode = 2;
-                    userData.errMessage = `User's not found`
+                    userData.errMessage = `Tài khoản không tồn tại!`
                 }
 
             } else {
                 //return error
                 userData.errCode = 1;
-                userData.errMessage = `Your's email isn't exist in the system.`;
+                userData.errMessage = `Tài khoản không tồn tại.`;
 
             }
             resolve(userData);
@@ -134,7 +134,7 @@ let createNewUser = (data) => {
             if (check === true) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Your email is already in used. Please try another email!'
+                    errMessage: 'Email đã tồn tại. Vui lòng nhập địa chỉ email khác!'
                 });
             } else {
                 let hashPasswordFromBcrypt = await hashUserPassword(data.password);
@@ -171,7 +171,7 @@ let deleteUser = (userId) => {
         if (!user) {
             resolve({
                 errCode: 2,
-                errMessage: `The user isn't exist!`
+                errMessage: `Tài khoản không tồn tại!`
             })
         }
 
@@ -181,7 +181,7 @@ let deleteUser = (userId) => {
 
         resolve({
             errCode: 0,
-            errMessage: 'Delete succeed!'
+            errMessage: 'Xóa tài khoản thành công!'
         })
     })
 }
