@@ -191,6 +191,80 @@ let saveBasicSalaryService = (inputData) => {
     })
 }
 
+let confirmSalaryService = (inputData) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!inputData.staffId || !inputData.basicSalary || !inputData.month) {
+                resolve({
+                    errCode: 1,
+                    errMessage: "Thiếu thông tin nhân viên/ tháng/ lương cơ bản!"
+                })
+            } else {
+                //------------update status S1 -> S2 ---------
+                //upsert table Salaries
+                let staffSalary = await db.Salary.findOne({
+                    where: {
+                        staffId: inputData.staffId,
+                        month: inputData.month
+                    },
+                    raw: false
+                })
+
+                if (staffSalary.statusId === 'S2') {
+                    resolve({
+                        errCode: 2,
+                        errMessage: "Bảng lương đã được xác nhận!"
+                    })
+                } else {
+                    //update
+                    staffSalary.statusId = 'S2';
+
+                    await staffSalary.save();
+                }
+
+
+
+                // ----------------------------------------------------------------------
+                //upsert table onsiteSalaries
+                let staffOnsiteSalary = await db.OnsiteSalary.findOne({
+                    where: {
+                        staffId: inputData.staffId,
+                        month: inputData.month
+                    },
+                    raw: false
+                })
+
+                //update
+                staffOnsiteSalary.statusId = 'S2';
+
+                await staffOnsiteSalary.save();
+
+                // ----------------------------------------------------------------------
+                //upsert table overtimeSalaries
+                let staffOvertimeSalary = await db.OvertimeSalary.findOne({
+                    where: {
+                        staffId: inputData.staffId,
+                        month: inputData.month
+                    },
+                    raw: false
+                })
+
+                //update
+                staffOvertimeSalary.statusId = 'S2';
+
+                await staffOvertimeSalary.save();
+
+                resolve({
+                    errCode: 0,
+                    errMessage: "Confirm the payroll succeed!"
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 let getBasicSalaryByIdService = (staffId, month) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -414,6 +488,7 @@ let getAllSalaryByMonth = (staffId, month) => {
 
 module.exports = {
     saveBasicSalaryService: saveBasicSalaryService,
+    confirmSalaryService: confirmSalaryService,
     getBasicSalaryByIdService: getBasicSalaryByIdService,
     getBonusSalaryByIdService: getBonusSalaryByIdService,
     getProjectSalaryByIdService: getProjectSalaryByIdService,

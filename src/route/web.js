@@ -16,7 +16,6 @@ let initWebRoutes = (app) => {
     router.post("/put-crud", homeController.putCRUD);
     router.get("/delete-crud", homeController.deleteCRUD);
 
-
     router.post("/api/login", userController.handleLogin);
     router.get("/api/get-all-users", userController.handleGetAllUsers);
     router.post("/api/create-new-user", userController.handleCreateNewUser);
@@ -32,6 +31,7 @@ let initWebRoutes = (app) => {
     router.delete("/api/delete-event", eventController.handleDeleteEvent);
 
     router.post("/api/save-basic-salary", salaryController.postBasicSalary);
+    router.post("/api/confirm-salary", salaryController.confirmSalary);
     router.get("/api/get-basic-salary-by-id", salaryController.getBasicSalaryById);
     router.get("/api/get-bonus-salary-by-id", salaryController.getBonusSalaryById);
     router.get("/api/get-project-salary-by-id", salaryController.getProjectSalaryById);
